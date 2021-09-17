@@ -45,3 +45,22 @@ Route::post('/calculator', function (Illuminate\Http\Request $request) {
     $discountPrice = $price - $discountAmount;
     return view('display', compact(['description','percent','price', 'discountAmount','discountPrice']));
 });
+
+Route::get('/dictionary', function () {
+    return view('dictionary');
+});
+
+Route::post('/result', function (Illuminate\Http\Request $request) {
+   $word = $request->word;
+   $array = [
+     'family' => 'Gia đình',
+     'love' => 'Tình Yêu',
+     'developer' => 'Lập  Viên'
+   ];
+   foreach ($array as $key => $mean) {
+       if ($key == $word) {
+           return view('result', compact(['word','mean']));
+       }
+   }
+   return view('error');
+});
